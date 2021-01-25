@@ -1,0 +1,8 @@
+version: "3.0"
+
+services:
+  spring:
+    image: gradle-demo
+    build: .
+    ports:
+      - "8080:8080"
