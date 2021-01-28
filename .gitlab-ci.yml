@@ -1,15 +1,11 @@
 default:
   image: openjdk:11-jdk
 
-build-job:
-  stage: build
-  script: 
-    - ./gradlew assemble
-  artifacts:
-    when: always
-    paths:
-      - build/libs/*.jar
-test-job:
+stages:
+  - test
+  - build
+
+test-stage:
   stage: test
   script:
     - ./gradlew test
@@ -18,3 +14,12 @@ test-job:
     reports:
       junit:
         - build/test-results/test/TEST-*.xml
+
+build-stage:
+  stage: build
+  script: 
+    - ./gradlew assemble
+  artifacts:
+    when: always
+    paths:
+      - build/libs/*.jar
